@@ -279,3 +279,459 @@ cine:paisSede a owl:DatatypeProperty ;
     rdfs:label "país-sede"@pt ;
     rdfs:domain cine:Organizacao ;
     rdfs:range xsd:string .
+
+
+# =============================================================================
+#  A-BOX
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+#  Filmes
+#  Cada filme declara só seus gêneros mais específicos. Que ele é Ficcao,
+#  Filme, Obra e schema:Movie fica para o reasoner inferir.
+# -----------------------------------------------------------------------------
+
+cine:interestelar a cine:FiccaoCientifica , cine:Drama ;
+    rdfs:label "Interestelar" ;
+    cine:anoLancamento 2014 ;
+    cine:duracaoMinutos 169 ;
+    cine:notaIMDb 8.7 ;
+    cine:dirigidoPor cine:nolan ;
+    cine:roteirizadoPor cine:nolan , cine:jonathanNolan ;
+    cine:temNoElenco cine:mcconaughey , cine:hathaway , cine:chastain ;
+    cine:trilhaSonoraDe cine:zimmer ;
+    cine:produzidoPor cine:paramount , cine:warner , cine:legendary ;
+    cine:ganhouPremio cine:oscarEfeitosVisuais .
+
+cine:aOrigem a cine:FiccaoCientifica , cine:Acao ;
+    rdfs:label "A Origem" ;
+    cine:anoLancamento 2010 ;
+    cine:duracaoMinutos 148 ;
+    cine:notaIMDb 8.8 ;
+    cine:dirigidoPor cine:nolan ;
+    cine:roteirizadoPor cine:nolan ;
+    cine:temNoElenco cine:dicaprio , cine:murphy ;
+    cine:trilhaSonoraDe cine:zimmer ;
+    cine:produzidoPor cine:warner , cine:legendary ;
+    cine:ganhouPremio cine:oscarEfeitosVisuais .
+
+cine:cavaleiroDasTrevas a cine:Acao , cine:Drama ;
+    rdfs:label "Batman: O Cavaleiro das Trevas" ;
+    cine:anoLancamento 2008 ;
+    cine:duracaoMinutos 152 ;
+    cine:notaIMDb 9.0 ;
+    cine:dirigidoPor cine:nolan ;
+    cine:roteirizadoPor cine:nolan , cine:jonathanNolan ;
+    cine:temNoElenco cine:bale , cine:ledger , cine:murphy , cine:freeman ;
+    cine:trilhaSonoraDe cine:zimmer ;
+    cine:produzidoPor cine:warner , cine:legendary .
+
+cine:oppenheimer a cine:Drama ;
+    rdfs:label "Oppenheimer" ;
+    cine:anoLancamento 2023 ;
+    cine:duracaoMinutos 180 ;
+    cine:notaIMDb 8.3 ;
+    cine:dirigidoPor cine:nolan ;
+    cine:roteirizadoPor cine:nolan ;
+    cine:temNoElenco cine:murphy ;
+    cine:trilhaSonoraDe cine:goransson ;
+    cine:produzidoPor cine:universal ;
+    cine:ganhouPremio cine:oscarMelhorFilme , cine:oscarTrilhaSonora .
+
+cine:duna a cine:FiccaoCientifica ;
+    rdfs:label "Duna" ;
+    cine:anoLancamento 2021 ;
+    cine:duracaoMinutos 155 ;
+    cine:notaIMDb 8.0 ;
+    cine:dirigidoPor cine:villeneuve ;
+    cine:temNoElenco cine:chalamet , cine:zendaya ;
+    cine:trilhaSonoraDe cine:zimmer ;
+    cine:produzidoPor cine:legendary , cine:warner ;
+    cine:ganhouPremio cine:oscarEfeitosVisuais , cine:oscarTrilhaSonora .
+
+cine:dunaParteDois a cine:FiccaoCientifica ;
+    rdfs:label "Duna: Parte Dois" ;
+    cine:anoLancamento 2024 ;
+    cine:duracaoMinutos 166 ;
+    cine:notaIMDb 8.5 ;
+    cine:dirigidoPor cine:villeneuve ;
+    cine:temNoElenco cine:chalamet , cine:zendaya ;
+    cine:trilhaSonoraDe cine:zimmer ;
+    cine:produzidoPor cine:legendary , cine:warner ;
+    cine:sequenciaDe cine:duna ;
+    cine:ganhouPremio cine:oscarEfeitosVisuais .
+
+cine:aChegada a cine:FiccaoCientifica , cine:Drama ;
+    rdfs:label "A Chegada" ;
+    cine:anoLancamento 2016 ;
+    cine:duracaoMinutos 116 ;
+    cine:notaIMDb 7.9 ;
+    cine:dirigidoPor cine:villeneuve ;
+    cine:temNoElenco cine:adams ;
+    cine:trilhaSonoraDe cine:johannsson ;
+    cine:produzidoPor cine:paramount .
+
+cine:bladeRunner2049 a cine:FiccaoCientifica ;
+    rdfs:label "Blade Runner 2049" ;
+    cine:anoLancamento 2017 ;
+    cine:duracaoMinutos 164 ;
+    cine:notaIMDb 8.0 ;
+    cine:dirigidoPor cine:villeneuve ;
+    cine:temNoElenco cine:gosling , cine:ford ;
+    cine:trilhaSonoraDe cine:zimmer ;
+    cine:produzidoPor cine:warner ;
+    cine:ganhouPremio cine:oscarEfeitosVisuais .
+
+cine:odisseia2001 a cine:FiccaoCientifica ;
+    rdfs:label "2001: Uma Odisseia no Espaço" ;
+    cine:anoLancamento 1968 ;
+    cine:duracaoMinutos 149 ;
+    cine:notaIMDb 8.3 ;
+    cine:dirigidoPor cine:kubrick ;
+    cine:roteirizadoPor cine:kubrick , cine:clarke ;
+    cine:temNoElenco cine:dullea ;
+    cine:produzidoPor cine:mgm ;
+    cine:ganhouPremio cine:oscarEfeitosVisuais .
+
+cine:oIluminado a cine:Terror ;
+    rdfs:label "O Iluminado" ;
+    cine:anoLancamento 1980 ;
+    cine:duracaoMinutos 146 ;
+    cine:notaIMDb 8.4 ;
+    cine:dirigidoPor cine:kubrick ;
+    cine:roteirizadoPor cine:kubrick ;
+    cine:temNoElenco cine:nicholson ;
+    cine:produzidoPor cine:warner .
+
+cine:corra a cine:Terror ;
+    rdfs:label "Corra!" ;
+    cine:anoLancamento 2017 ;
+    cine:duracaoMinutos 104 ;
+    cine:notaIMDb 7.8 ;
+    cine:dirigidoPor cine:peele ;
+    cine:roteirizadoPor cine:peele ;
+    cine:temNoElenco cine:kaluuya ;
+    cine:produzidoPor cine:blumhouse , cine:universal ;
+    cine:ganhouPremio cine:oscarRoteiroOriginal .
+
+cine:parasita a cine:Drama ;
+    rdfs:label "Parasita" ;
+    cine:anoLancamento 2019 ;
+    cine:duracaoMinutos 132 ;
+    cine:notaIMDb 8.5 ;
+    cine:dirigidoPor cine:bongJoonHo ;
+    cine:roteirizadoPor cine:bongJoonHo ;
+    cine:temNoElenco cine:songKangHo ;
+    cine:produzidoPor cine:cjEntertainment ;
+    cine:ganhouPremio cine:oscarMelhorFilme , cine:oscarRoteiroOriginal , cine:palmaDeOuro .
+
+cine:meninaDeOuro a cine:Drama ;
+    rdfs:label "Menina de Ouro" ;
+    cine:anoLancamento 2004 ;
+    cine:duracaoMinutos 132 ;
+    cine:notaIMDb 8.1 ;
+    cine:dirigidoPor cine:eastwood ;
+    cine:roteirizadoPor cine:haggis ;
+    cine:temNoElenco cine:eastwood , cine:swank , cine:freeman ;
+    cine:produzidoPor cine:warner ;
+    cine:ganhouPremio cine:oscarMelhorFilme .
+
+cine:toyStory a cine:Animacao ;
+    rdfs:label "Toy Story" ;
+    cine:anoLancamento 1995 ;
+    cine:duracaoMinutos 81 ;
+    cine:notaIMDb 8.3 ;
+    cine:dirigidoPor cine:lasseter ;
+    cine:temNoElenco cine:hanks ;
+    cine:trilhaSonoraDe cine:newman ;
+    cine:produzidoPor cine:pixar .
+
+cine:toyStory2 a cine:Animacao ;
+    rdfs:label "Toy Story 2" ;
+    cine:anoLancamento 1999 ;
+    cine:duracaoMinutos 92 ;
+    cine:notaIMDb 7.9 ;
+    cine:dirigidoPor cine:lasseter , cine:unkrich ;
+    cine:temNoElenco cine:hanks ;
+    cine:trilhaSonoraDe cine:newman ;
+    cine:produzidoPor cine:pixar ;
+    cine:sequenciaDe cine:toyStory .
+
+cine:toyStory3 a cine:Animacao ;
+    rdfs:label "Toy Story 3" ;
+    cine:anoLancamento 2010 ;
+    cine:duracaoMinutos 103 ;
+    cine:notaIMDb 8.3 ;
+    cine:dirigidoPor cine:unkrich ;
+    cine:temNoElenco cine:hanks ;
+    cine:trilhaSonoraDe cine:newman ;
+    cine:produzidoPor cine:pixar ;
+    cine:sequenciaDe cine:toyStory2 ;
+    cine:ganhouPremio cine:oscarAnimacao .
+
+cine:freeSolo a cine:Documentario ;
+    rdfs:label "Free Solo" ;
+    cine:anoLancamento 2018 ;
+    cine:duracaoMinutos 100 ;
+    cine:notaIMDb 8.1 ;
+    cine:dirigidoPor cine:chin , cine:vasarhelyi ;
+    cine:ganhouPremio cine:oscarDocumentario .
+
+# -----------------------------------------------------------------------------
+#  Pessoas
+#  Cada pessoa declara só o papel principal. Os demais papéis são inferidos
+#  pelo rdfs:range das propriedades: Nolan vira Roteirista porque roteirizou
+#  filmes, e Eastwood vira Ator porque está no elenco de Menina de Ouro.
+# -----------------------------------------------------------------------------
+
+# Diretores
+cine:nolan a cine:Diretor ;
+    rdfs:label "Christopher Nolan" ;
+    cine:anoNascimento 1970 ;
+    cine:nacionalidade "Reino Unido" ;
+    cine:colaborouCom cine:zimmer , cine:jonathanNolan , cine:murphy .
+
+cine:villeneuve a cine:Diretor ;
+    rdfs:label "Denis Villeneuve" ;
+    cine:anoNascimento 1967 ;
+    cine:nacionalidade "Canadá" ;
+    cine:colaborouCom cine:zimmer .
+
+cine:kubrick a cine:Diretor ;
+    rdfs:label "Stanley Kubrick" ;
+    cine:anoNascimento 1928 ;
+    cine:nacionalidade "EUA" ;
+    cine:influenciou cine:nolan , cine:peele .
+
+cine:peele a cine:Diretor ;
+    rdfs:label "Jordan Peele" ;
+    cine:anoNascimento 1979 ;
+    cine:nacionalidade "EUA" .
+
+cine:bongJoonHo a cine:Diretor ;
+    rdfs:label "Bong Joon-ho" ;
+    cine:anoNascimento 1969 ;
+    cine:nacionalidade "Coreia do Sul" ;
+    cine:colaborouCom cine:songKangHo .
+
+cine:eastwood a cine:Diretor ;
+    rdfs:label "Clint Eastwood" ;
+    cine:anoNascimento 1930 ;
+    cine:nacionalidade "EUA" ;
+    cine:colaborouCom cine:freeman .
+
+cine:lasseter a cine:Diretor ;
+    rdfs:label "John Lasseter" ;
+    cine:anoNascimento 1957 ;
+    cine:nacionalidade "EUA" ;
+    cine:colaborouCom cine:unkrich .
+
+cine:unkrich a cine:Diretor ;
+    rdfs:label "Lee Unkrich" ;
+    cine:anoNascimento 1967 ;
+    cine:nacionalidade "EUA" .
+
+cine:chin a cine:Diretor ;
+    rdfs:label "Jimmy Chin" ;
+    cine:anoNascimento 1973 ;
+    cine:nacionalidade "EUA" ;
+    cine:colaborouCom cine:vasarhelyi .
+
+cine:vasarhelyi a cine:Diretor ;
+    rdfs:label "Elizabeth Chai Vasarhelyi" ;
+    cine:anoNascimento 1979 ;
+    cine:nacionalidade "EUA" .
+
+# A cadeia de influência que a transitividade completa:
+# Kubrick → Nolan → Villeneuve
+cine:nolan cine:influenciou cine:villeneuve .
+
+# Roteiristas
+cine:jonathanNolan a cine:Roteirista ;
+    rdfs:label "Jonathan Nolan" ;
+    cine:anoNascimento 1976 ;
+    cine:nacionalidade "Reino Unido" .
+
+cine:clarke a cine:Roteirista ;
+    rdfs:label "Arthur C. Clarke" ;
+    cine:anoNascimento 1917 ;
+    cine:nacionalidade "Reino Unido" .
+
+cine:haggis a cine:Roteirista ;
+    rdfs:label "Paul Haggis" ;
+    cine:anoNascimento 1953 ;
+    cine:nacionalidade "Canadá" .
+
+# Compositores
+cine:zimmer a cine:Compositor ;
+    rdfs:label "Hans Zimmer" ;
+    cine:anoNascimento 1957 ;
+    cine:nacionalidade "Alemanha" .
+
+cine:goransson a cine:Compositor ;
+    rdfs:label "Ludwig Göransson" ;
+    cine:anoNascimento 1984 ;
+    cine:nacionalidade "Suécia" .
+
+cine:johannsson a cine:Compositor ;
+    rdfs:label "Jóhann Jóhannsson" ;
+    cine:anoNascimento 1969 ;
+    cine:nacionalidade "Islândia" .
+
+cine:newman a cine:Compositor ;
+    rdfs:label "Randy Newman" ;
+    cine:anoNascimento 1943 ;
+    cine:nacionalidade "EUA" .
+
+# Atores
+cine:mcconaughey a cine:Ator ;
+    rdfs:label "Matthew McConaughey" ;
+    cine:anoNascimento 1969 ;
+    cine:nacionalidade "EUA" .
+
+cine:hathaway a cine:Ator ;
+    rdfs:label "Anne Hathaway" ;
+    cine:anoNascimento 1982 ;
+    cine:nacionalidade "EUA" .
+
+cine:chastain a cine:Ator ;
+    rdfs:label "Jessica Chastain" ;
+    cine:anoNascimento 1977 ;
+    cine:nacionalidade "EUA" .
+
+cine:dicaprio a cine:Ator ;
+    rdfs:label "Leonardo DiCaprio" ;
+    cine:anoNascimento 1974 ;
+    cine:nacionalidade "EUA" .
+
+cine:murphy a cine:Ator ;
+    rdfs:label "Cillian Murphy" ;
+    cine:anoNascimento 1976 ;
+    cine:nacionalidade "Irlanda" .
+
+cine:bale a cine:Ator ;
+    rdfs:label "Christian Bale" ;
+    cine:anoNascimento 1974 ;
+    cine:nacionalidade "Reino Unido" .
+
+cine:ledger a cine:Ator ;
+    rdfs:label "Heath Ledger" ;
+    cine:anoNascimento 1979 ;
+    cine:nacionalidade "Austrália" .
+
+cine:freeman a cine:Ator ;
+    rdfs:label "Morgan Freeman" ;
+    cine:anoNascimento 1937 ;
+    cine:nacionalidade "EUA" .
+
+cine:chalamet a cine:Ator ;
+    rdfs:label "Timothée Chalamet" ;
+    cine:anoNascimento 1995 ;
+    cine:nacionalidade "EUA" .
+
+cine:zendaya a cine:Ator ;
+    rdfs:label "Zendaya" ;
+    cine:anoNascimento 1996 ;
+    cine:nacionalidade "EUA" .
+
+cine:adams a cine:Ator ;
+    rdfs:label "Amy Adams" ;
+    cine:anoNascimento 1974 ;
+    cine:nacionalidade "EUA" .
+
+cine:gosling a cine:Ator ;
+    rdfs:label "Ryan Gosling" ;
+    cine:anoNascimento 1980 ;
+    cine:nacionalidade "Canadá" .
+
+cine:ford a cine:Ator ;
+    rdfs:label "Harrison Ford" ;
+    cine:anoNascimento 1942 ;
+    cine:nacionalidade "EUA" .
+
+cine:dullea a cine:Ator ;
+    rdfs:label "Keir Dullea" ;
+    cine:anoNascimento 1936 ;
+    cine:nacionalidade "EUA" .
+
+cine:nicholson a cine:Ator ;
+    rdfs:label "Jack Nicholson" ;
+    cine:anoNascimento 1937 ;
+    cine:nacionalidade "EUA" .
+
+cine:kaluuya a cine:Ator ;
+    rdfs:label "Daniel Kaluuya" ;
+    cine:anoNascimento 1989 ;
+    cine:nacionalidade "Reino Unido" .
+
+cine:songKangHo a cine:Ator ;
+    rdfs:label "Song Kang-ho" ;
+    cine:anoNascimento 1967 ;
+    cine:nacionalidade "Coreia do Sul" .
+
+cine:swank a cine:Ator ;
+    rdfs:label "Hilary Swank" ;
+    cine:anoNascimento 1974 ;
+    cine:nacionalidade "EUA" .
+
+cine:hanks a cine:Ator ;
+    rdfs:label "Tom Hanks" ;
+    rdfs:comment "Voz de Woody na franquia Toy Story."@pt ;
+    cine:anoNascimento 1956 ;
+    cine:nacionalidade "EUA" .
+
+# -----------------------------------------------------------------------------
+#  Estúdios
+# -----------------------------------------------------------------------------
+
+cine:warner a cine:Estudio ;
+    rdfs:label "Warner Bros." ;
+    cine:anoFundacao 1923 ;
+    cine:paisSede "EUA" .
+
+cine:paramount a cine:Estudio ;
+    rdfs:label "Paramount Pictures" ;
+    cine:anoFundacao 1912 ;
+    cine:paisSede "EUA" .
+
+cine:universal a cine:Estudio ;
+    rdfs:label "Universal Pictures" ;
+    cine:anoFundacao 1912 ;
+    cine:paisSede "EUA" .
+
+cine:legendary a cine:Estudio ;
+    rdfs:label "Legendary Pictures" ;
+    cine:anoFundacao 2000 ;
+    cine:paisSede "EUA" .
+
+cine:pixar a cine:Estudio ;
+    rdfs:label "Pixar Animation Studios" ;
+    cine:anoFundacao 1986 ;
+    cine:paisSede "EUA" .
+
+cine:mgm a cine:Estudio ;
+    rdfs:label "Metro-Goldwyn-Mayer" ;
+    cine:anoFundacao 1924 ;
+    cine:paisSede "EUA" .
+
+cine:blumhouse a cine:Estudio ;
+    rdfs:label "Blumhouse Productions" ;
+    cine:anoFundacao 2000 ;
+    cine:paisSede "EUA" .
+
+cine:cjEntertainment a cine:Estudio ;
+    rdfs:label "CJ Entertainment" ;
+    cine:anoFundacao 1995 ;
+    cine:paisSede "Coreia do Sul" .
+
+# -----------------------------------------------------------------------------
+#  Prêmios (categorias)
+# -----------------------------------------------------------------------------
+
+cine:oscarMelhorFilme      a cine:Premio ; rdfs:label "Oscar de Melhor Filme" .
+cine:oscarEfeitosVisuais   a cine:Premio ; rdfs:label "Oscar de Melhores Efeitos Visuais" .
+cine:oscarRoteiroOriginal  a cine:Premio ; rdfs:label "Oscar de Melhor Roteiro Original" .
+cine:oscarTrilhaSonora     a cine:Premio ; rdfs:label "Oscar de Melhor Trilha Sonora" .
+cine:oscarAnimacao         a cine:Premio ; rdfs:label "Oscar de Melhor Filme de Animação" .
+cine:oscarDocumentario     a cine:Premio ; rdfs:label "Oscar de Melhor Documentário" .
+cine:palmaDeOuro           a cine:Premio ; rdfs:label "Palma de Ouro (Cannes)" .
