@@ -1,0 +1,281 @@
+@prefix cine:   <http://ufpb.br/sbc/cinefilo#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+
+# =============================================================================
+#  Cinéfilo: base de conhecimento sobre cinema
+#  Mini-Projeto 3, Sistemas Baseados em Conhecimento (UFPB)
+#
+#  O arquivo está dividido em duas partes:
+#    T-Box: o esquema (classes, hierarquia, propriedades e axiomas OWL)
+#    A-Box: os fatos sobre indivíduos (filmes, pessoas, estúdios e prêmios)
+#
+#  Notas IMDb e durações foram consultadas em 2026 e são aproximadas.
+# =============================================================================
+
+<http://ufpb.br/sbc/cinefilo> a owl:Ontology ;
+    rdfs:label "Ontologia Cinéfilo"@pt ;
+    rdfs:comment "Filmes, profissionais, estúdios e prêmios, modelados com RDF, RDFS e OWL."@pt .
+
+
+# =============================================================================
+#  T-BOX
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+#  Classes e hierarquia (rdfs:subClassOf)
+#
+#  Obra
+#   └─ Filme                      (≡ schema:Movie)
+#       ├─ Ficcao
+#       │   ├─ FiccaoCientifica
+#       │   ├─ Drama
+#       │   ├─ Acao
+#       │   ├─ Terror
+#       │   └─ Animacao
+#       └─ Documentario           (disjunta de Ficcao)
+#  Pessoa                         (≡ schema:Person)
+#   └─ Profissional
+#       ├─ Diretor
+#       ├─ Ator
+#       ├─ Roteirista
+#       └─ Compositor
+#  Organizacao
+#   └─ Estudio
+#  Premio
+# -----------------------------------------------------------------------------
+
+cine:Obra a owl:Class ;
+    rdfs:label "Obra"@pt ;
+    rdfs:comment "Raiz das produções audiovisuais."@pt .
+
+cine:Filme a owl:Class ;
+    rdfs:subClassOf cine:Obra ;
+    rdfs:label "Filme"@pt ;
+    rdfs:comment "Longa-metragem lançado comercialmente."@pt .
+
+cine:Ficcao a owl:Class ;
+    rdfs:subClassOf cine:Filme ;
+    rdfs:label "Ficção"@pt ;
+    rdfs:comment "Filme com narrativa inventada. Um filme pode pertencer a mais de um gênero de ficção."@pt .
+
+cine:FiccaoCientifica a owl:Class ;
+    rdfs:subClassOf cine:Ficcao ;
+    rdfs:label "Ficção científica"@pt .
+
+cine:Drama a owl:Class ;
+    rdfs:subClassOf cine:Ficcao ;
+    rdfs:label "Drama"@pt .
+
+cine:Acao a owl:Class ;
+    rdfs:subClassOf cine:Ficcao ;
+    rdfs:label "Ação"@pt .
+
+cine:Terror a owl:Class ;
+    rdfs:subClassOf cine:Ficcao ;
+    rdfs:label "Terror"@pt .
+
+cine:Animacao a owl:Class ;
+    rdfs:subClassOf cine:Ficcao ;
+    rdfs:label "Animação"@pt .
+
+cine:Documentario a owl:Class ;
+    rdfs:subClassOf cine:Filme ;
+    rdfs:label "Documentário"@pt ;
+    rdfs:comment "Filme que registra fatos reais, sem roteiro ficcional."@pt .
+
+cine:Pessoa a owl:Class ;
+    rdfs:label "Pessoa"@pt .
+
+cine:Profissional a owl:Class ;
+    rdfs:subClassOf cine:Pessoa ;
+    rdfs:label "Profissional de cinema"@pt .
+
+cine:Diretor a owl:Class ;
+    rdfs:subClassOf cine:Profissional ;
+    rdfs:label "Diretor"@pt .
+
+cine:Ator a owl:Class ;
+    rdfs:subClassOf cine:Profissional ;
+    rdfs:label "Ator"@pt ;
+    rdfs:comment "Inclui atuação por voz, como em animações."@pt .
+
+cine:Roteirista a owl:Class ;
+    rdfs:subClassOf cine:Profissional ;
+    rdfs:label "Roteirista"@pt .
+
+cine:Compositor a owl:Class ;
+    rdfs:subClassOf cine:Profissional ;
+    rdfs:label "Compositor de trilha sonora"@pt .
+
+cine:Organizacao a owl:Class ;
+    rdfs:label "Organização"@pt .
+
+cine:Estudio a owl:Class ;
+    rdfs:subClassOf cine:Organizacao ;
+    rdfs:label "Estúdio"@pt ;
+    rdfs:comment "Empresa que produz ou distribui filmes."@pt .
+
+cine:Premio a owl:Class ;
+    rdfs:label "Prêmio"@pt ;
+    rdfs:comment "Categoria de premiação concedida a um filme (ex.: Oscar de Melhor Filme)."@pt .
+
+# -----------------------------------------------------------------------------
+#  OWL 1: owl:disjointWith
+#  Um filme não pode ser ao mesmo tempo ficção e documentário, e obras, pessoas
+#  e organizações são tipos de coisa que nunca se confundem. Já Diretor, Ator e
+#  Roteirista NÃO são disjuntas, de propósito: Clint Eastwood dirige e atua, e
+#  Christopher Nolan dirige e escreve.
+# -----------------------------------------------------------------------------
+
+cine:Ficcao owl:disjointWith cine:Documentario .
+cine:Obra   owl:disjointWith cine:Pessoa , cine:Organizacao , cine:Premio .
+cine:Pessoa owl:disjointWith cine:Organizacao , cine:Premio .
+
+# -----------------------------------------------------------------------------
+#  OWL 2: owl:equivalentClass
+#  Alinhamento com o vocabulário schema.org, usado por buscadores. Todo
+#  cine:Filme passa a ser reconhecido como schema:Movie (e vice-versa), o que
+#  permite integrar esta base com dados de outras fontes.
+# -----------------------------------------------------------------------------
+
+cine:Filme  owl:equivalentClass schema:Movie .
+cine:Pessoa owl:equivalentClass schema:Person .
+
+# -----------------------------------------------------------------------------
+#  Propriedades de objeto
+# -----------------------------------------------------------------------------
+
+# OWL 3: owl:inverseOf
+# Os créditos são registrados a partir do filme (filme dirigidoPor pessoa), mas
+# a pergunta natural costuma partir da pessoa ("o que Nolan dirigiu?"). A
+# inversa responde as duas sem duplicar fatos na base.
+# dirigidoPor não é funcional: Toy Story 2 e Free Solo têm dois diretores.
+
+cine:dirigidoPor a owl:ObjectProperty ;
+    rdfs:label "dirigido por"@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range cine:Diretor ;
+    owl:inverseOf cine:dirigiu .
+
+cine:dirigiu a owl:ObjectProperty ;
+    rdfs:label "dirigiu"@pt ;
+    rdfs:domain cine:Diretor ;
+    rdfs:range cine:Filme .
+
+cine:temNoElenco a owl:ObjectProperty ;
+    rdfs:label "tem no elenco"@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range cine:Ator ;
+    owl:inverseOf cine:atuouEm .
+
+cine:atuouEm a owl:ObjectProperty ;
+    rdfs:label "atuou em"@pt ;
+    rdfs:domain cine:Ator ;
+    rdfs:range cine:Filme .
+
+cine:roteirizadoPor a owl:ObjectProperty ;
+    rdfs:label "roteirizado por"@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range cine:Roteirista .
+
+cine:trilhaSonoraDe a owl:ObjectProperty ;
+    rdfs:label "trilha sonora de"@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range cine:Compositor .
+
+cine:produzidoPor a owl:ObjectProperty ;
+    rdfs:label "produzido por"@pt ;
+    rdfs:comment "Estúdio responsável pela produção ou distribuição principal."@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range cine:Estudio .
+
+cine:ganhouPremio a owl:ObjectProperty ;
+    rdfs:label "ganhou prêmio"@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range cine:Premio .
+
+# OWL 4: owl:TransitiveProperty
+# Influência artística se propaga: se Kubrick influenciou Nolan e Nolan
+# influenciou Villeneuve, Kubrick também influenciou Villeneuve, ainda que
+# indiretamente.
+
+cine:influenciou a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "influenciou"@pt ;
+    rdfs:domain cine:Diretor ;
+    rdfs:range cine:Diretor .
+
+# OWL 5: owl:SymmetricProperty
+# Colaboração é mútua: se A colaborou com B, B colaborou com A.
+
+cine:colaborouCom a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "colaborou com"@pt ;
+    rdfs:comment "Parceria recorrente entre profissionais (mais de um filme juntos)."@pt ;
+    rdfs:domain cine:Profissional ;
+    rdfs:range cine:Profissional .
+
+# OWL 6: owl:AsymmetricProperty + rdfs:subPropertyOf + owl:TransitiveProperty
+# "Sequência direta" não é transitiva (Toy Story 3 não é a sequência direta de
+# Toy Story), e é assimétrica (se B é sequência de A, A não pode ser sequência
+# de B). Mas toda sequência direta vem depois na franquia, e essa relação mais
+# geral é transitiva. Assim, Toy Story 3 é posterior a Toy Story por inferência.
+
+cine:sequenciaDe a owl:ObjectProperty , owl:AsymmetricProperty ;
+    rdfs:label "sequência direta de"@pt ;
+    rdfs:subPropertyOf cine:posteriorNaFranquiaA ;
+    rdfs:domain cine:Filme ;
+    rdfs:range cine:Filme .
+
+cine:posteriorNaFranquiaA a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "posterior na franquia a"@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range cine:Filme .
+
+# -----------------------------------------------------------------------------
+#  Propriedades de dados
+#
+#  OWL 7: owl:FunctionalProperty
+#  Um filme tem um único ano de lançamento, uma única duração e uma única nota
+#  atual no IMDb; uma pessoa nasce em um único ano; um estúdio é fundado uma
+#  única vez. Por isso, atualizar esses valores exige DELETE/INSERT, e não só
+#  INSERT (ver a consulta S12 no notebook).
+# -----------------------------------------------------------------------------
+
+cine:anoLancamento a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "ano de lançamento"@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range xsd:integer .
+
+cine:duracaoMinutos a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "duração (min)"@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range xsd:integer .
+
+cine:notaIMDb a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "nota no IMDb"@pt ;
+    rdfs:comment "Nota média de 0 a 10 no IMDb."@pt ;
+    rdfs:domain cine:Filme ;
+    rdfs:range xsd:decimal .
+
+cine:anoNascimento a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "ano de nascimento"@pt ;
+    rdfs:domain cine:Pessoa ;
+    rdfs:range xsd:integer .
+
+cine:nacionalidade a owl:DatatypeProperty ;
+    rdfs:label "nacionalidade"@pt ;
+    rdfs:domain cine:Pessoa ;
+    rdfs:range xsd:string .
+
+cine:anoFundacao a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "ano de fundação"@pt ;
+    rdfs:domain cine:Organizacao ;
+    rdfs:range xsd:integer .
+
+cine:paisSede a owl:DatatypeProperty ;
+    rdfs:label "país-sede"@pt ;
+    rdfs:domain cine:Organizacao ;
+    rdfs:range xsd:string .
